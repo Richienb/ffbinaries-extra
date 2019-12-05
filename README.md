@@ -1,41 +1,72 @@
-# The module [![Travis CI Build Status](https://img.shields.io/travis/com/Richienb/the-module/master.svg?style=for-the-badge)](https://travis-ci.com/Richienb/the-module)
+# FFBinaries Extra [![Travis CI Build Status](https://img.shields.io/travis/com/Richienb/ffbinaries-extra/master.svg?style=for-the-badge)](https://travis-ci.com/Richienb/ffbinaries-extra)
 
-My awesome module.
+FFBinaries with promise support, request normalisation and a simplified API.
 
-[![NPM Badge](https://nodei.co/npm/the-module.png)](https://npmjs.com/package/the-module)
+[![NPM Badge](https://nodei.co/npm/ffbinaries-extra.png)](https://npmjs.com/package/ffbinaries-extra)
 
 ## Install
 
 ```sh
-npm install the-module
+npm install ffbinaries-extra
 ```
 
 ## Usage
 
 ```js
-const theModule = require("the-module");
+const ffBinaries = require("ffbinaries-extra");
 
-theModule("unicorns");
-//=> 'unicorns & rainbows'
+ffBinaries.downloadBinaries();
+//=> Promise<void>
 ```
 
 ## API
 
-### theModule(input, options?)
+### getVersions()
 
-#### input
+Get the versions of FFBinaries available.
 
-Type: `string`
+### getLatestVersion()
 
-Lorem ipsum.
+Get the latest version of FFBinaries available.
+
+### downloadBinaries(options?)
 
 #### options
 
 Type: `object`
 
-##### postfix
+##### components
 
-Type: `string`\
-Default: `rainbows`
+Type: `Array<"ffmpeg" | "ffprobe" | "ffserver" | "ffplay">`
 
-Lorem ipsum.
+An array of string values that describes which components to download. If not provided it will default to all components available for the platform.
+
+##### version
+
+Type: `string`
+
+The version of ffmpeg to download.
+
+##### extract
+
+Type: `boolean`
+
+Automatically extract downloaded zip files. Defaults to true.
+
+##### destination
+
+Type: `string`
+
+The path where the binaries will be downloaded to.
+
+### supportedPlatforms
+
+Type: `string[]`
+
+The platforms supported by FFBinaries.
+
+### currentPlatform
+
+Type: `string`
+
+The current platform as detected from the os type and architecture.

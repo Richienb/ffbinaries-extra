@@ -1,13 +1,10 @@
 import test from "ava"
-import theModule from "."
+import _ from "lodash"
+import ffBinaries from "."
 
-test("main", (t) => {
-    t.throws(() => {
-        theModule(123)
-    }, {
-        instanceOf: TypeError,
-        message: "Expected a string, got number",
-    })
-
-    t.is(theModule("unicorns"), "unicorns & rainbows")
+test("main", async (t) => {
+    t.true(_.isArray(await ffBinaries.getVersions()))
+    t.true(_.isString(await ffBinaries.getLatestVersion()))
+    t.true(_.isArray(ffBinaries.supportedPlatforms))
+    t.true(_.isString(ffBinaries.currentPlatform))
 })
