@@ -6,6 +6,7 @@ const _ = require("lodash")
 const joinURL = require("url-join")
 const download = require("download")
 const latestSemver = require("latest-semver")
+const pMap = require("p-map")
 
 module.exports = {
     getVersions: async () => _
@@ -19,16 +20,13 @@ module.exports = {
     },
     getVersion: ({ version = "latest" } = {}) => ky(joinURL("version", version)).json(),
     async downloadBinaries({ components = ["ffmpeg", "ffprobe", "ffplay", "ffserver"], version = "latest", extract = true, destination = process.cwd() } = {}) {
-        return _
-            .chain(await this.getVersion(version))
+        return pMap(_
+            .chain(await this.getVersion({ version }))
             .get("bin")
             .get(this.currentPlatform)
             .pick(components)
-            .mapValues((url) => download(url, destination, {
-                extract,
-            }))
-            .thru(() => undefined)
-            .value()
+            .values()
+            .value(), (url) => download(url, destination, { extract }))
     },
     supportedPlatforms: ["osx-64", "linux-32", "linux-64", "linux-armel", "linux-armhf", "windows-32", "windows-64"],
     currentPlatform: (() => {

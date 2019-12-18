@@ -42,7 +42,7 @@ declare const ffbinaries: {
          * The path where the binaries will be downloaded to.
         */
         destination?: string,
-    }): Promise<void>
+    }): Promise<Array<Promise<Buffer> & NodeJS.WritableStream & NodeJS.ReadableStream>>
 
     /**
      * The platforms supported by FFBinaries.

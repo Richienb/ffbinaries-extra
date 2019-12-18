@@ -1,3 +1,9 @@
+# Downloaded files
+
+ffmpeg.exe
+ffplay.exe
+ffprobe.exe
+
 # Visual Studio Code
 
 .vscode/*
