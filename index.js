@@ -1,3 +1,5 @@
+"use strict"
+
 const os = require("os")
 const ky = require("ky-universal").create({
     prefixUrl: "https://ffbinaries.com/api/v1/",
@@ -8,7 +10,7 @@ const download = require("download")
 const latestSemver = require("latest-semver")
 const pMap = require("p-map")
 
-module.exports = {
+const ffbinariesExtra = {
     getVersions: async () => _
         .chain(await ky("versions").json())
         .get("versions")
@@ -16,14 +18,14 @@ module.exports = {
         .tail()
         .value(),
     async getLatestVersion() {
-        return latestSemver(await this.getVersions())
+        return latestSemver(await ffbinariesExtra.getVersions())
     },
     getVersion: ({ version = "latest" } = {}) => ky(joinURL("version", version)).json(),
     async downloadBinaries({ components = ["ffmpeg", "ffprobe", "ffplay", "ffserver"], version = "latest", extract = true, destination = process.cwd() } = {}) {
         return pMap(_
-            .chain(await this.getVersion({ version }))
+            .chain(await ffbinariesExtra.getVersion({ version }))
             .get("bin")
-            .get(this.currentPlatform)
+            .get(ffbinariesExtra.currentPlatform)
             .pick(components)
             .values()
             .value(), (url) => download(url, destination, { extract }))
@@ -45,3 +47,5 @@ module.exports = {
         return null
     })(),
 }
+
+module.exports = ffbinariesExtra
