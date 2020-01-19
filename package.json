@@ -37,7 +37,7 @@
         "url-join": "^4.0.1"
     },
     "devDependencies": {
-        "ava": "^2.1.0",
+        "ava": "^3.0.0",
         "eslint-config-richienb": "^0.2.3",
         "xo": "^0.25.3"
     },
