@@ -29,7 +29,7 @@
     ],
     "dependencies": {
         "download": "^7.1.0",
-        "ky": "^0.16.1",
+        "ky": "^0.17.0",
         "ky-universal": "^0.3.0",
         "latest-semver": "^2.0.0",
         "lodash": "^4.17.15",
