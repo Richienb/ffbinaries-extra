@@ -33,7 +33,7 @@
         "ky-universal": "^0.3.0",
         "latest-semver": "^2.0.0",
         "lodash": "^4.17.15",
-        "p-map": "^3.0.0",
+        "p-map": "^4.0.0",
         "url-join": "^4.0.1"
     },
     "devDependencies": {
