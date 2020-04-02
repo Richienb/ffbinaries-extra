@@ -28,7 +28,7 @@
         "request"
     ],
     "dependencies": {
-        "download": "^7.1.0",
+        "download": "^8.0.0",
         "ky": "^0.16.1",
         "ky-universal": "^0.3.0",
         "latest-semver": "^2.0.0",
